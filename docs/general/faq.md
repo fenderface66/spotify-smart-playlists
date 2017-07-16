@@ -187,7 +187,7 @@ WebStorm is a powerful IDE, and why not also use it as debugger tool? Here is th
 9.  Edit Run Configuration Again
 10.  Mapping Url as below picture
     * Map your `root` directory with `webpack://.` (please note the last dot)
-    * Map your `build` directory with your root path (e.g. `http://localhost:3000`)
+    * Map your `build` directory with your root path (e.g. `http://smartify.local:3000`)
 11.  Hit OK and restart debugging session
 
 ![How to debug using WebStorm](webstorm-debug.png)

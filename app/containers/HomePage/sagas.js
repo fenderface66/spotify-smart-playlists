@@ -14,10 +14,11 @@ import { makeSelectUsername } from 'containers/HomePage/selectors';
 export function* loginSpotify() {
 	const client_id = '4d6b8fb609cb4b1fbf703331fba1ac3f'; // Your client id
 	const client_secret = '48383dc3e4614055a76356bd807707d1'; // Your secret
-	const requestURL = `http://localhost:3000/api/login?client_id=${client_id}&client_secret=${client_secret}`;           
+  const username = yield select(makeSelectUsername());
+	const requestURL = `http://smartify.local:3000/api/login?user=${username}`;           
 	const authOptions = {
-		url: 'http://localhost:3000/login',
-		method: 'POST'
+		url: 'http://smartify.local:3000/login',
+		method: 'POST' 
 	}
 	try {
 		// Call our request helper (see 'utils/request')

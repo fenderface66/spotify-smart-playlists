@@ -63,14 +63,18 @@ export class HomePage extends React.PureComponent { // eslint-disable-line react
               <FormattedMessage {...messages.trymeHeader} />
             </H2>
 
-                <div>
-									<div id="login">
-									 <h1>First, log in to spotify</h1>
-									 <a onClick={this.props.onSubmitForm} href="/login">Log in</a>
-									</div>
-									<div id="loggedin">
-									</div>
- 								</div>
+              <Form onSubmit={this.props.onSubmitForm}>
+                <label htmlFor="username">
+                  <FormattedMessage {...messages.trymeMessage} />
+                  <Input
+                    id="username"
+                    type="text"
+                    placeholder="mxstbr"
+                    value={this.props.username}
+                    onChange={this.props.onChangeUsername}
+                  />
+                </label>
+              </Form>
 
             <ReposList {...reposListProps} />
           </Section>

@@ -2,22 +2,19 @@
 
 const express = require('express');
 const logger = require('./logger');
-const router = require('router');
-
+const router = express.router;
 const argv = require('minimist')(process.argv.slice(2));
 const setup = require('./middlewares/frontendMiddleware');
 const isDev = process.env.NODE_ENV !== 'production';
 const ngrok = (isDev && process.env.ENABLE_TUNNEL) || argv.tunnel ? require('ngrok') : false;
 const resolve = require('path').resolve;
 const app = express();
-
-const apiRoute = router.route('/api')
-const spotifyLoginRoute = require('./spotify/app')
-
-apiRoute.use('/login', spotifyLoginRoutes)
+const spotify = require('./spotify/app')
 
 // If you need a backend, e.g. an API, add your custom backend-specific middleware here
 // app.use('/api', myApi);
+
+app.post('/api/login', spotify.login);
 
 // In production we need to pass these values in instead of relying on webpack
 setup(app, {
@@ -53,9 +50,3 @@ app.listen(port, host, (err) => {
   }
 });
 
-
-
-// POST method route
-app.post('/login', function (req, res) {
-  console.log(req.query);
-})
