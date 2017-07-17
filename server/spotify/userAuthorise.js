@@ -4,12 +4,13 @@
  * the Spotify Accounts.
  */
 
-var querystring = require('querystring');
-var request = require('request'); // "Request" library
+const querystring = require('querystring');
+const request = require('request'); // "Request" library
+const url = require('url');   
 
-var client_id = '4d6b8fb609cb4b1fbf703331fba1ac3f'; // Your client id
-var client_secret = '48383dc3e4614055a76356bd807707d1'; // Your secret
-var redirect_uri = 'http://localhost:3000/api/authCallback'; // Your redirect uri
+const client_id = '4d6b8fb609cb4b1fbf703331fba1ac3f'; // Client id
+const client_secret = '48383dc3e4614055a76356bd807707d1'; // Secret
+const redirect_uri = 'http://localhost:3000/api/authCallback'; // Redirect uri
 
 var generateRandomString = function(length) {
   var text = '';
@@ -43,7 +44,7 @@ exports.login = function(req, res, next) {
 }
 
 exports.tokenExchange = function(req, res, next) {
-  // your application requests refresh and access tokens
+  // Application requests refresh and access tokens
   // after checking the state parameter
 
   var code = req.query.code || null;
@@ -90,11 +91,13 @@ exports.tokenExchange = function(req, res, next) {
         });
 
         // we can also pass the token to the browser to make requests from there
-        res.redirect('/#' +
-          querystring.stringify({
-            access_token: access_token,
-            refresh_token: refresh_token
-          }));
+        res.redirect(url.format({
+         pathname:"/",
+         query: {
+            "access_token": access_token,
+            "refresh_token": refresh_token,
+          }
+     }));
       } else {
         res.redirect('/#' +
           querystring.stringify({

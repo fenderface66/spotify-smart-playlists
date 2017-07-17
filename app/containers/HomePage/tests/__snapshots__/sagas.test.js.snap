@@ -21,7 +21,7 @@ Object {
 }
 `;
 
-exports[`getRepos Saga should dispatch the reposLoaded action if it requests the data successfully 1`] = `
+exports[`getRepos Saga should dispatch the playlistsLoaded action if it requests the data successfully 1`] = `
 Object {
   "@@redux-saga/IO": true,
   "SELECT": Object {
@@ -31,7 +31,7 @@ Object {
 }
 `;
 
-exports[`getRepos Saga should dispatch the reposLoaded action if it requests the data successfully 2`] = `
+exports[`getRepos Saga should dispatch the playlistsLoaded action if it requests the data successfully 2`] = `
 Object {
   "@@redux-saga/IO": true,
   "CALL": Object {

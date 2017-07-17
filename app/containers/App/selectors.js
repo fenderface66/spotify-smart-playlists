@@ -21,9 +21,9 @@ const makeSelectError = () => createSelector(
   (globalState) => globalState.get('error')
 );
 
-const makeSelectRepos = () => createSelector(
+const makeSelectPlaylists = () => createSelector(
   selectGlobal,
-  (globalState) => globalState.getIn(['userData', 'repositories'])
+  (globalState) => globalState.getIn(['playlistsData', 'playlists'])
 );
 
 const makeSelectLocationState = () => {
@@ -47,6 +47,6 @@ export {
   makeSelectCurrentUser,
   makeSelectLoading,
   makeSelectError,
-  makeSelectRepos,
+  makeSelectPlaylists,
   makeSelectLocationState,
 };

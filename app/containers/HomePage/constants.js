@@ -10,3 +10,4 @@
  */
 
 export const GET_AUTHPARAMS = 'smartify/Home/GET_AUTHPARAMS';
+export const GET_playlists_SUCCESS = 'smartify/Home/GET_playlists_SUCCESS';

@@ -34,6 +34,8 @@ export function changeUsername(name) {
 }
 
 export function getAuthParams(params) {
+  console.log('running action getAuthParams, params below');
+  console.log(params);
   return {
     type: GET_AUTHPARAMS,
     params,
