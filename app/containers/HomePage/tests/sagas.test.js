@@ -8,9 +8,9 @@ import { createMockTask } from 'redux-saga/lib/utils';
 import { LOCATION_CHANGE } from 'react-router-redux';
 
 import { LOAD_REPOS } from 'containers/App/constants';
-import { reposLoaded, repoLoadingError } from 'containers/App/actions';
+import { playlistsLoaded, repoLoadingError } from 'containers/App/actions';
 
-import { getRepos, githubData } from '../sagas';
+import { getRepos, spotifydata } from '../sagas';
 
 const username = 'mxstbr';
 
@@ -30,14 +30,14 @@ describe('getRepos Saga', () => {
     expect(callDescriptor).toMatchSnapshot();
   });
 
-  it('should dispatch the reposLoaded action if it requests the data successfully', () => {
+  it('should dispatch the playlistsLoaded action if it requests the data successfully', () => {
     const response = [{
       name: 'First repo',
     }, {
       name: 'Second repo',
     }];
     const putDescriptor = getReposGenerator.next(response).value;
-    expect(putDescriptor).toEqual(put(reposLoaded(response, username)));
+    expect(putDescriptor).toEqual(put(playlistsLoaded(response, username)));
   });
 
   it('should call the repoLoadingError action if the response errors', () => {
@@ -47,22 +47,22 @@ describe('getRepos Saga', () => {
   });
 });
 
-describe('githubDataSaga Saga', () => {
-  const githubDataSaga = githubData();
+describe('spotifydataSaga Saga', () => {
+  const spotifydataSaga = spotifydata();
   const mockedTask = createMockTask();
 
   it('should start task to watch for LOAD_REPOS action', () => {
-    const takeLatestDescriptor = githubDataSaga.next().value;
+    const takeLatestDescriptor = spotifydataSaga.next().value;
     expect(takeLatestDescriptor).toEqual(takeLatest(LOAD_REPOS, getRepos));
   });
 
   it('should yield until LOCATION_CHANGE action', () => {
-    const takeDescriptor = githubDataSaga.next(mockedTask).value;
+    const takeDescriptor = spotifydataSaga.next(mockedTask).value;
     expect(takeDescriptor).toEqual(take(LOCATION_CHANGE));
   });
 
   it('should cancel the forked task when LOCATION_CHANGE happens', () => {
-    const cancelDescriptor = githubDataSaga.next().value;
+    const cancelDescriptor = spotifydataSaga.next().value;
     expect(cancelDescriptor).toEqual(cancel(mockedTask));
   });
 });

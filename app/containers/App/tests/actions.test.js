@@ -1,12 +1,12 @@
 import {
   LOAD_REPOS,
-  LOAD_REPOS_SUCCESS,
-  LOAD_REPOS_ERROR,
+  LOAD_playlists_SUCCESS,
+  LOAD_playlists_ERROR,
 } from '../constants';
 
 import {
   loadRepos,
-  reposLoaded,
+  playlistsLoaded,
   repoLoadingError,
 } from '../actions';
 
@@ -21,17 +21,17 @@ describe('App Actions', () => {
     });
   });
 
-  describe('reposLoaded', () => {
+  describe('playlistsLoaded', () => {
     it('should return the correct type and the passed repos', () => {
       const fixture = ['Test'];
       const username = 'test';
       const expectedResult = {
-        type: LOAD_REPOS_SUCCESS,
+        type: LOAD_playlists_SUCCESS,
         repos: fixture,
         username,
       };
 
-      expect(reposLoaded(fixture, username)).toEqual(expectedResult);
+      expect(playlistsLoaded(fixture, username)).toEqual(expectedResult);
     });
   });
 
@@ -41,7 +41,7 @@ describe('App Actions', () => {
         msg: 'Something went wrong!',
       };
       const expectedResult = {
-        type: LOAD_REPOS_ERROR,
+        type: LOAD_playlists_ERROR,
         error: fixture,
       };
 

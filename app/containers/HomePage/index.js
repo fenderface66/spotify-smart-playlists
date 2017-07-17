@@ -10,9 +10,9 @@ import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
-import { makeSelectRepos, makeSelectLoading, makeSelectError } from 'containers/App/selectors';
+import { makeSelectPlaylists, makeSelectLoading, makeSelectError } from 'containers/App/selectors';
 import H2 from 'components/H2';
-import ReposList from 'components/ReposList';
+import PlaylistList from 'components/PlaylistList';
 import Button from 'components/Button';
 import AtPrefix from './AtPrefix';
 import CenteredSection from './CenteredSection';
@@ -34,7 +34,7 @@ export class HomePage extends React.PureComponent { // eslint-disable-line react
       this.props.onSubmitForm();
     }
     
-    if (this.props.router.location.query.code) {
+    if (this.props.router.location.query.access_token) {
       this.props.onReceiveAuth(this.props.router.location.query);
     }
     
@@ -42,18 +42,23 @@ export class HomePage extends React.PureComponent { // eslint-disable-line react
   
   renderButton() {
     return (
-      <Button href="/api/userAuthorise">
-        Login
-      </Button>
+      <div>
+        <H2>
+          <FormattedMessage {...messages.trymeHeader} />
+        </H2>
+        <Button href="/api/userAuthorise">
+          Login 
+        </Button>
+      </div>
     )
   }
 
   render() {
-    const { loading, error, repos } = this.props;
-    const reposListProps = {
+    const { loading, error, playlists } = this.props;
+    const playlistsListProps = {
       loading,
       error,
-      repos,
+      playlists,
     };
 
     return (
@@ -74,24 +79,9 @@ export class HomePage extends React.PureComponent { // eslint-disable-line react
             </p>
           </CenteredSection>
           <Section>
-            <H2>
-              <FormattedMessage {...messages.trymeHeader} />
-            </H2>
-
-              <Form onSubmit={this.props.onSubmitForm}>
-                <label htmlFor="username">
-                  <FormattedMessage {...messages.trymeMessage} />
-                  <Input
-                    id="username"
-                    type="text"
-                    placeholder="mxstbr"
-                    value={this.props.username}
-                    onChange={this.props.onChangeUsername}
-                  />
-                </label>
-              </Form>
-              {!this.props.router.location.query.code ? this.renderButton() : null }
-            <ReposList {...reposListProps} />
+            
+              {!this.props.router.location.query.access_token ? this.renderButton() : null }
+              <PlaylistList {...playlistsListProps}></PlaylistList>
           </Section>
         </div>
       </article>
@@ -105,10 +95,7 @@ HomePage.propTypes = {
     React.PropTypes.object,
     React.PropTypes.bool,
   ]),
-  repos: React.PropTypes.oneOfType([
-    React.PropTypes.array,
-    React.PropTypes.bool,
-  ]),
+  playlists: React.PropTypes.array,
   onSubmitForm: React.PropTypes.func,
   authParams: React.PropTypes.object,
 };
@@ -125,7 +112,7 @@ export function mapDispatchToProps(dispatch) {
 }
 
 const mapStateToProps = createStructuredSelector({
-  repos: makeSelectRepos(),
+  playlists: makeSelectPlaylists(),
   authParams: makeSelectAuthParams(),
   loading: makeSelectLoading(),
   error: makeSelectError(),

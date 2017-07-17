@@ -5,7 +5,7 @@ import ListItem from 'components/ListItem';
 import LoadingIndicator from 'components/LoadingIndicator';
 import RepoListItem from 'containers/RepoListItem';
 
-function ReposList({ loading, error, repos }) {
+function PlaylistList({ loading, error, playlists }) {
   if (loading) {
     return <List component={LoadingIndicator} />;
   }
@@ -17,17 +17,17 @@ function ReposList({ loading, error, repos }) {
     return <List component={ErrorComponent} />;
   }
 
-  if (repos !== false) {
-    return <List items={repos} component={RepoListItem} />;
+  if (playlists !== false) {
+    return <List items={playlists} component={RepoListItem} />;
   }
 
   return null;
 }
 
-ReposList.propTypes = {
+PlaylistList.propTypes = {
   loading: PropTypes.bool,
   error: PropTypes.any,
-  repos: PropTypes.any,
+  playlists: PropTypes.any,
 };
 
-export default ReposList;
+export default PlaylistList;

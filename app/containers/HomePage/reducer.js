@@ -13,19 +13,23 @@ import { fromJS } from 'immutable';
 
 import {
   GET_AUTHPARAMS,
+  GET_playlists_SUCCESS
 } from './constants';
 
 // The initial state of the App
 const initialState = fromJS({
-  authParams: {},
+  authParams: {
+    access_token: '',
+    refresh_token: '',
+  },
 });
 
 function homeReducer(state = initialState, action) {
   switch (action.type) {
     case GET_AUTHPARAMS:
+      console.log(action);
       return state
-        .set('code', action.params.code)
-        .set('state', action.params.state);
+        .setIn(['authParams'], action.params)
     default:
       return state;
   }
