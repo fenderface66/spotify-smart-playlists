@@ -16,9 +16,7 @@
  */
 
 import {
-  LOAD_REPOS,
-  LOAD_REPOS_SUCCESS,
-  LOAD_REPOS_ERROR,
+  GET_AUTH
 } from './constants';
 
 /**

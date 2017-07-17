@@ -13,24 +13,39 @@ import { createStructuredSelector } from 'reselect';
 import { makeSelectRepos, makeSelectLoading, makeSelectError } from 'containers/App/selectors';
 import H2 from 'components/H2';
 import ReposList from 'components/ReposList';
+import Button from 'components/Button';
 import AtPrefix from './AtPrefix';
 import CenteredSection from './CenteredSection';
 import Form from './Form';
 import Input from './Input';
 import Section from './Section';
 import messages from './messages';
-import { loadRepos } from '../App/actions';
-import { changeUsername } from './actions';
-import { makeSelectUsername } from './selectors';
+import { getAuthParams } from './actions';
+import { makeSelectAuthParams } from './selectors';
+
 
 export class HomePage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   /**
    * when initial state username is not null, submit the form to load repos
    */
   componentDidMount() {
+    
     if (this.props.username && this.props.username.trim().length > 0) {
       this.props.onSubmitForm();
     }
+    
+    if (this.props.router.location.query.code) {
+      this.props.onReceiveAuth(this.props.router.location.query);
+    }
+    
+  }
+  
+  renderButton() {
+    return (
+      <Button href="/api/userAuthorise">
+        Login
+      </Button>
+    )
   }
 
   render() {
@@ -75,7 +90,7 @@ export class HomePage extends React.PureComponent { // eslint-disable-line react
                   />
                 </label>
               </Form>
-
+              {!this.props.router.location.query.code ? this.renderButton() : null }
             <ReposList {...reposListProps} />
           </Section>
         </div>
@@ -95,23 +110,23 @@ HomePage.propTypes = {
     React.PropTypes.bool,
   ]),
   onSubmitForm: React.PropTypes.func,
-  username: React.PropTypes.string,
-  onChangeUsername: React.PropTypes.func,
+  authParams: React.PropTypes.object,
 };
 
 export function mapDispatchToProps(dispatch) {
   return {
-    onChangeUsername: (evt) => dispatch(changeUsername(evt.target.value)),
     onSubmitForm: (evt) => {
-      if (evt !== undefined && evt.preventDefault) evt.preventDefault();
-      dispatch(loadRepos());
+      dispatch();
+    },
+    onReceiveAuth: (query) => {
+      dispatch(getAuthParams(query));
     },
   };
 }
 
 const mapStateToProps = createStructuredSelector({
   repos: makeSelectRepos(),
-  username: makeSelectUsername(),
+  authParams: makeSelectAuthParams(),
   loading: makeSelectLoading(),
   error: makeSelectError(),
 });
