@@ -4,22 +4,28 @@
 
 import { take, call, put, select, cancel, takeLatest } from 'redux-saga/effects';
 import { LOCATION_CHANGE } from 'react-router-redux';
-import { LOAD_REPOS } from 'containers/App/constants';
+import { GET_AUTHPARAMS } from 'containers/HomePage/constants';
 import { reposLoaded, repoLoadingError } from 'containers/App/actions';
 
 import request from 'utils/request';
-import { makeSelectUsername } from 'containers/HomePage/selectors';
+import { makeSelectAuthParams } from 'containers/HomePage/selectors';
 
 
 export function* loginSpotify() {
-	const client_id = '4d6b8fb609cb4b1fbf703331fba1ac3f'; // Your client id
-	const client_secret = '48383dc3e4614055a76356bd807707d1'; // Your secret
-  const username = yield select(makeSelectUsername());
-	const requestURL = `http://smartify.local:3000/api/login?user=${username}`;           
-	const authOptions = {
-		url: 'http://smartify.local:3000/login',
-		method: 'POST' 
-	}
+  const authParams = yield select(makeSelectAuthParams());
+  console.log(authParams);
+  
+  var authOptions = {
+      url: 'https://accounts.spotify.com/api/token',
+      form: {
+        code: code,
+        grant_type: 'authorization_code'
+      },
+      headers: {
+        'Authorization': 'Basic ' + (new Buffer(client_id + ':' + client_secret).toString('base64'))
+      },
+      json: true
+    };
 	try {
 		// Call our request helper (see 'utils/request')
 		const repos = yield call(request, requestURL, authOptions);
@@ -28,11 +34,6 @@ export function* loginSpotify() {
 		yield put(repoLoadingError(err));
 	}
 }
-
-
-
-
-
 
 /**
  * Github repos request/response handler
@@ -58,7 +59,7 @@ export function* githubData() {
   // Watches for LOAD_REPOS actions and calls getRepos when one comes in.
   // By using `takeLatest` only the result of the latest API call is applied.
   // It returns task descriptor (just like fork) so we can continue execution
-  const watcher = yield takeLatest(LOAD_REPOS, loginSpotify);
+  const watcher = yield takeLatest(GET_AUTHPARAMS, loginSpotify);
 
   // Suspend execution until location changes
   yield take(LOCATION_CHANGE);

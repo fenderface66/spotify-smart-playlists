@@ -16,7 +16,7 @@
  */
 
 import {
-  CHANGE_USERNAME,
+  GET_AUTHPARAMS,
 } from './constants';
 
 /**
@@ -30,5 +30,12 @@ export function changeUsername(name) {
   return {
     type: CHANGE_USERNAME,
     name,
+  };
+}
+
+export function getAuthParams(params) {
+  return {
+    type: GET_AUTHPARAMS,
+    params,
   };
 }
