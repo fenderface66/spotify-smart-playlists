@@ -1,33 +1,33 @@
 import {
   LOAD_REPOS,
-  LOAD_playlists_SUCCESS,
-  LOAD_playlists_ERROR,
+  LOAD_PLAYLISTS_SUCCESS,
+  LOAD_PLAYLISTS_ERROR,
 } from '../constants';
 
 import {
-  loadRepos,
+  loadPlaylists,
   playlistsLoaded,
-  repoLoadingError,
+  playlistLoadingError,
 } from '../actions';
 
 describe('App Actions', () => {
-  describe('loadRepos', () => {
+  describe('loadPlaylists', () => {
     it('should return the correct type', () => {
       const expectedResult = {
         type: LOAD_REPOS,
       };
 
-      expect(loadRepos()).toEqual(expectedResult);
+      expect(loadPlaylists()).toEqual(expectedResult);
     });
   });
 
   describe('playlistsLoaded', () => {
-    it('should return the correct type and the passed repos', () => {
+    it('should return the correct type and the passed playlists', () => {
       const fixture = ['Test'];
       const username = 'test';
       const expectedResult = {
-        type: LOAD_playlists_SUCCESS,
-        repos: fixture,
+        type: LOAD_PLAYLISTS_SUCCESS,
+        playlists: fixture,
         username,
       };
 
@@ -35,17 +35,17 @@ describe('App Actions', () => {
     });
   });
 
-  describe('repoLoadingError', () => {
+  describe('playlistLoadingError', () => {
     it('should return the correct type and the error', () => {
       const fixture = {
         msg: 'Something went wrong!',
       };
       const expectedResult = {
-        type: LOAD_playlists_ERROR,
+        type: LOAD_PLAYLISTS_ERROR,
         error: fixture,
       };
 
-      expect(repoLoadingError(fixture)).toEqual(expectedResult);
+      expect(playlistLoadingError(fixture)).toEqual(expectedResult);
     });
   });
 });

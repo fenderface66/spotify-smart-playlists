@@ -12,7 +12,7 @@ beautifully for data fetching, concurrent computations and a lot more.
 >
 > This adds a level of indirection that is unnecessary for simple apps, but make
   it more easy to scale complex applications. You can now publish widget1 and
-  widget2 to different npm repositories so that they never have to know about
+  widget2 to different npm playlistsitories so that they never have to know about
   each others, without having them to share a global registry of actions. The 2
   widgets are now bounded contexts that can live separately. They do not need
   each others to be consistent and can be reused in other apps as well. **The saga

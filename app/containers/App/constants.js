@@ -10,7 +10,8 @@
  */
 
 export const GET_AUTH = 'smartify/App/GET_AUTH';
-export const LOAD_PLAYLISTS_SUCCESS = 'smartify/App/LOAD_playlists_SUCCESS';
-export const LOAD_PLAYLISTS_ERROR = 'smartify/App/LOAD_playlists_ERROR';
+export const LOAD_PLAYLISTS_SUCCESS = 'smartify/App/LOAD_PLAYLISTS_SUCCESS';
+export const LOAD_PLAYLISTS_ERROR = 'smartify/App/LOAD_PLAYLISTS_ERROR';
+export const TOGGLE_SELECTED_PLAYLIST = 'smartify/App/TOGGLE_SELECTED_PLAYLIST';
 export const GET_PLAYLISTS = 'smartify/App/GET_PLAYLISTS';
 export const DEFAULT_LOCALE = 'en';

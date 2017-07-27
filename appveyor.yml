@@ -15,11 +15,11 @@ environment:
     - nodejs_version: 6
     - nodejs_version: 5
 
-# Fix line endings in Windows. (runs before repo cloning)
+# Fix line endings in Windows. (runs before playlist cloning)
 init:
   - git config --global core.autocrlf input
 
-# Install scripts--runs after repo cloning
+# Install scripts--runs after playlist cloning
 install:
   # Install chrome
   - choco install -y googlechrome

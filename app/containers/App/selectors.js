@@ -23,7 +23,7 @@ const makeSelectError = () => createSelector(
 
 const makeSelectPlaylists = () => createSelector(
   selectGlobal,
-  (globalState) => globalState.getIn(['playlistsData', 'playlists'])
+  (globalState) => globalState.get('playlists')
 );
 
 const makeSelectLocationState = () => {

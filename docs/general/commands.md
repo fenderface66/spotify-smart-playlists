@@ -7,7 +7,7 @@ npm run setup
 ```
 
 Initializes a new project with this boilerplate. Deletes the `react-boilerplate`
-git history, installs the dependencies and initializes a new repository.
+git history, installs the dependencies and initializes a new playlistsitory.
 
 > Note: This command is self-destructive, once you've run it the init script is
 gone forever. This is for your own safety, so you can't delete your project's

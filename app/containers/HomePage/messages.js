@@ -20,7 +20,7 @@ export default defineMessages({
   },
   trymeMessage: {
     id: 'smartify.containers.HomePage.tryme.message',
-    defaultMessage: 'Show Github repositories by',
+    defaultMessage: 'Show Github playlistsitories by',
   },
   trymeAtPrefix: {
     id: 'smartify.containers.HomePage.tryme.atPrefix',

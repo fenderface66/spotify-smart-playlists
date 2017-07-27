@@ -1,27 +1,27 @@
 import React from 'react';
 import { shallow, render } from 'enzyme';
 
-import IssueLink from '../IssueLink';
+import PlaylistLink from '../PlaylistLink';
 
-describe('<IssueLink />', () => {
+describe('<PlaylistLink />', () => {
   it('should render an <a> tag', () => {
-    const renderedComponent = render(<IssueLink />);
+    const renderedComponent = render(<PlaylistLink />);
     expect(renderedComponent.find('a').length).toEqual(1);
   });
 
   it('should have a className attribute', () => {
-    const renderedComponent = shallow(<IssueLink />);
+    const renderedComponent = shallow(<PlaylistLink />);
     expect(renderedComponent.prop('className')).toBeDefined();
   });
 
   it('should adopt a valid attribute', () => {
     const id = 'test';
-    const renderedComponent = shallow(<IssueLink id={id} />);
+    const renderedComponent = shallow(<PlaylistLink id={id} />);
     expect(renderedComponent.prop('id')).toEqual(id);
   });
 
   it('should not adopt an invalid attribute', () => {
-    const renderedComponent = shallow(<IssueLink attribute={'test'} />);
+    const renderedComponent = shallow(<PlaylistLink attribute={'test'} />);
     expect(renderedComponent.prop('attribute')).toBeUndefined();
   });
 });
