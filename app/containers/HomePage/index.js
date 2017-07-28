@@ -15,13 +15,13 @@ import Button from 'components/Button';
 import AtPrefix from './AtPrefix';
 import CenteredSection from './CenteredSection';
 import PlayListFeed from 'containers/PlayListFeed'; 
+import PlayListEditor from 'containers/PlayListEditor';
 import Form from './Form';
 import Input from './Input';
 import Section from './Section';
 import messages from './messages';
 import { getAuthParams } from './actions';
 import { makeSelectAuthParams } from './selectors';
-
 
 export class HomePage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   /**
@@ -77,9 +77,10 @@ export class HomePage extends React.PureComponent { // eslint-disable-line react
               <FormattedMessage {...messages.startProjectMessage} />
             </p>
           </CenteredSection>
+             
           <Section>
-            
-              {!this.props.router.location.query.access_token ? this.renderButton() : null }
+              
+              {!this.props.router.location.query.access_token ? this.renderButton() : <PlayListEditor /> }
               <PlayListFeed />
           </Section>
         </div>

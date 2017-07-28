@@ -1,5 +1,5 @@
 /**
- * PlaylistListEditor
+ * PlaylistEditor
  *
  * Allows users to edit their smart playlists
  */
@@ -7,27 +7,47 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
-import { FormattedNumber } from 'react-intl';
+import { makeSelectEditorState } from 'containers/HomePage/selectors';
+import { toggleSmartEditor } from 'containers/HomePage/actions';
 
-import { makeSelectCurrentUser } from 'containers/App/selectors';
-import ListItem from 'components/ListItem';
-import PlaylistLink from './PlaylistLink';
+import Button from 'components/Button';
 import Wrapper from './Wrapper';
+import EditorForm from './EditorForm';
 
-export class PlaylistListItem extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
-  
-  
+export class PlayListEditor extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
+
+  renderEditor() {
+    if (this.props.editorState) {
+      return (<EditorForm />);
+    }
+    return (
+      <Button onClick={() => this.props.onToggleSmartEditor()}>
+        Create a SmartList
+      </Button>
+    );
+  }
+
   render() {
-    
-
-    
+    return (
+      <Wrapper>
+        {this.renderEditor()}
+      </Wrapper>
+    );
   }
 }
 
-PlaylistListItem.propTypes = {
-  item: React.PropTypes.object,
+PlayListEditor.propTypes = {
+  editorState: React.PropTypes.bool,
+  onToggleSmartEditor: React.PropTypes.func,
 };
 
-export default connect(createStructuredSelector({
-        
-}))(PlaylistListItem);
+export function mapDispatchToProps(dispatch) {
+  return {
+    onToggleSmartEditor: () => dispatch(toggleSmartEditor()),
+  };
+}
+
+const mapStateToProps = createStructuredSelector({ editorState: makeSelectEditorState() });
+
+// Wrap the component to inject dispatch and state into it
+export default connect(mapStateToProps, mapDispatchToProps)(PlayListEditor);

@@ -6,10 +6,8 @@ import Wrapper from './Wrapper';
 function List(props) {
   const ComponentToRender = props.component;
   let content = (<div></div>);
-  console.log(props);
   // If we have items, render them
-  if (props.items) {
-    console.log(props.items);           
+  if (props.items) {         
     content = props.items.map((item, index) => (
       <ComponentToRender key={`item-${index}`} index={index} item={item} />
     ));

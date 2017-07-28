@@ -16,7 +16,6 @@ import PlaylistList from 'components/PlaylistList';
 export class PlayListFeed extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
 
   render() {
-    console.log(this.props);
     const { loading, error, playlists } = this.props;
     const playlistsListProps = {
       loading,
@@ -39,10 +38,6 @@ PlayListFeed.propTypes = {
   playlists: React.PropTypes.array
 };
 
-export function mapDispatchToProps(dispatch) {
-  return null
-}
-
 const mapStateToProps = createStructuredSelector({
   playlists: makeSelectPlaylists(),
   loading: makeSelectLoading(),
@@ -50,4 +45,4 @@ const mapStateToProps = createStructuredSelector({
 });
 
 // Wrap the component to inject dispatch and state into it
-export default connect(mapStateToProps, mapDispatchToProps)(PlayListFeed);
+export default connect(mapStateToProps, null)(PlayListFeed);

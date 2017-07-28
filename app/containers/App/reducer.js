@@ -37,7 +37,6 @@ function appReducer(state = initialState, action) {
         .set('loading', false);
     case TOGGLE_SELECTED_PLAYLIST:
         var playlists = state.get('playlists');
-        console.log(action);
         if (action.toggleState) {
           playlists[action.index].selected = true;
         

@@ -19,7 +19,6 @@ export class PlaylistListItem extends React.PureComponent { // eslint-disable-li
   
   render() {
     const item = this.props.item;
-    console.log(this.props);
     
     if(item !== undefined) {
       const content = (
