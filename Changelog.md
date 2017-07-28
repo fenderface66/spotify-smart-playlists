@@ -17,7 +17,7 @@
 - Update generator templates, thanks to @Virsaviya @jeremyadavis
 - Add support for the `--host` parameter when running `npm start`, thanks to @ifedotov
 - Showcase reselects `createStructuredSelector` in the example, thanks to @Dattaya
-- Exclude test files from coverage report, thanks to @samit4me
+- Exclude test files from coverage playlistrt, thanks to @samit4me
 - Lint the templates for the generators, thanks to @Dattaya
 - Huge improvement to DX testing a freshly cleaned project, thanks to @outdooricon
 
@@ -42,13 +42,13 @@
 
 ### News
 
-Welcome @KarandikarMihir to the team! Karandikar has been all over the repo, providing fixes and features. Happy to have him on board to make `react-boilerplate` even better!
+Welcome @KarandikarMihir to the team! Karandikar has been all over the playlist, providing fixes and features. Happy to have him on board to make `react-boilerplate` even better!
 
 Special thanks as always to @gihrig for diligently testing everything and keeping our dependencies up to date!
 
 Also, huge props to @samit4me and @Dattaya for being everywhere and fixing so many issues and of course to @KarandikarMihir for all his hard work.
 
-If you want to help us make react-boilerplate great, please use the `dev` branch, test all the things and report all the bugs!
+If you want to help us make react-boilerplate great, please use the `dev` branch, test all the things and playlistrt all the bugs!
 
 ### Supporters
 

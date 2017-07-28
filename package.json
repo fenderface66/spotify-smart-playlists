@@ -2,7 +2,7 @@
   "name": "smartify",
   "version": "0.0.1",
   "description": "Smart playlists for spotify",
-  "repository": {
+  "playlistsitory": {
     "type": "git",
     "url": "git://github.com/fenderface66/spotify-smart-playlists.git"
   },

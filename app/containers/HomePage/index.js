@@ -9,13 +9,13 @@ import Helmet from 'react-helmet';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
-
-import { makeSelectPlaylists, makeSelectLoading, makeSelectError } from 'containers/App/selectors';
 import H2 from 'components/H2';
 import PlaylistList from 'components/PlaylistList';
 import Button from 'components/Button';
 import AtPrefix from './AtPrefix';
 import CenteredSection from './CenteredSection';
+import PlayListFeed from 'containers/PlayListFeed'; 
+import PlayListEditor from 'containers/PlayListEditor';
 import Form from './Form';
 import Input from './Input';
 import Section from './Section';
@@ -23,10 +23,9 @@ import messages from './messages';
 import { getAuthParams } from './actions';
 import { makeSelectAuthParams } from './selectors';
 
-
 export class HomePage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   /**
-   * when initial state username is not null, submit the form to load repos
+   * when initial state username is not null, submit the form to load playlists
    */
   componentDidMount() {
     
@@ -78,10 +77,11 @@ export class HomePage extends React.PureComponent { // eslint-disable-line react
               <FormattedMessage {...messages.startProjectMessage} />
             </p>
           </CenteredSection>
+             
           <Section>
-            
-              {!this.props.router.location.query.access_token ? this.renderButton() : null }
-              <PlaylistList {...playlistsListProps}></PlaylistList>
+              
+              {!this.props.router.location.query.access_token ? this.renderButton() : <PlayListEditor /> }
+              <PlayListFeed />
           </Section>
         </div>
       </article>
@@ -90,12 +90,6 @@ export class HomePage extends React.PureComponent { // eslint-disable-line react
 }
 
 HomePage.propTypes = {
-  loading: React.PropTypes.bool,
-  error: React.PropTypes.oneOfType([
-    React.PropTypes.object,
-    React.PropTypes.bool,
-  ]),
-  playlists: React.PropTypes.array,
   onSubmitForm: React.PropTypes.func,
   authParams: React.PropTypes.object,
 };
@@ -112,10 +106,7 @@ export function mapDispatchToProps(dispatch) {
 }
 
 const mapStateToProps = createStructuredSelector({
-  playlists: makeSelectPlaylists(),
-  authParams: makeSelectAuthParams(),
-  loading: makeSelectLoading(),
-  error: makeSelectError(),
+  authParams: makeSelectAuthParams()
 });
 
 // Wrap the component to inject dispatch and state into it

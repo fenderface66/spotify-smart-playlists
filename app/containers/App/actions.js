@@ -18,19 +18,19 @@
 import {
   LOAD_PLAYLISTS_SUCCESS,
   LOAD_PLAYLISTS_ERROR,
+  TOGGLE_SELECTED_PLAYLIST
 } from './constants';
 
 
 /**
- * Dispatched when the repositories are loaded by the request saga
+ * Dispatched when the playlistsitories are loaded by the request saga
  *
- * @param  {array} repos The repository data
+ * @param  {array} playlists The playlistsitory data
  * @param  {string} username The current username
  *
- * @return {object}      An action object with a type of LOAD_playlists_SUCCESS passing the repos
+ * @return {object}      An action object with a type of LOAD_playlists_SUCCESS passing the playlists
  */
 export function playlistsLoaded(playlists) {
-  console.log('loaded');
   return {
     type: LOAD_PLAYLISTS_SUCCESS,
     playlists
@@ -38,15 +38,24 @@ export function playlistsLoaded(playlists) {
 }
 
 /**
- * Dispatched when loading the repositories fails
+ * Dispatched when loading the playlistsitories fails
  *
  * @param  {object} error The error
  *
  * @return {object}       An action object with a type of LOAD_playlists_ERROR passing the error
  */
-export function repoLoadingError(error) {
+export function playlistLoadingError(error) {
   return {
     type: LOAD_PLAYLISTS_ERROR,
     error,
+  };
+}
+
+export function toggleSelectedPlaylist(toggleState, playlist, index) {
+  return {
+    type: TOGGLE_SELECTED_PLAYLIST,
+    toggleState,
+    playlist,
+    index
   };
 }

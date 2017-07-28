@@ -1,5 +1,5 @@
 /*
- * Home Actions
+ * Playlist Editor Actions
  *
  * Actions change things in your application
  * Since this boilerplate uses a uni-directional data flow, specifically redux,
@@ -16,20 +16,28 @@
  */
 
 import {
-  GET_AUTHPARAMS,
-  TOGGLE_SMARTEDITOR
-} from './constants';
+  CHANGE_FORM_LOGIC,
+  CHANGE_TIME_UNIT,
+  CHANGE_TIME_AMOUNT,
+} from 'containers/HomePage/constants';
 
-export function getAuthParams(params) {
+export function changeFormLogic(logic) {
   return {
-    type: GET_AUTHPARAMS,
-    params,
+    type: CHANGE_FORM_LOGIC,
+    logic,
   };
 }
 
-export function toggleSmartEditor() {
-  console.log('here');
+export function changeTimeUnit(timeUnit) {
   return {
-    type: TOGGLE_SMARTEDITOR
+    type: CHANGE_TIME_UNIT,
+    timeUnit,
+  };
+}
+
+export function changeTimeAmount(timeAmount) {
+  return {
+    type: CHANGE_TIME_AMOUNT,
+    timeAmount,
   };
 }

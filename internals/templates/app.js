@@ -67,7 +67,6 @@ const rootRoute = {
 const render = (messages) => {
   ReactDOM.render(
     <Provider store={store}>
-      <LanguageProvider messages={messages}>
         <Router
           history={history}
           routes={rootRoute}
@@ -77,7 +76,6 @@ const render = (messages) => {
             applyRouterMiddleware(useScroll())
           }
         />
-      </LanguageProvider>
     </Provider>,
     document.getElementById('app')
   );

@@ -3,7 +3,7 @@ import React, { PropTypes } from 'react';
 import List from 'components/List';
 import ListItem from 'components/ListItem';
 import LoadingIndicator from 'components/LoadingIndicator';
-import RepoListItem from 'containers/RepoListItem';
+import PlaylistListItem from 'containers/PlaylistListItem';
 
 function PlaylistList({ loading, error, playlists }) {
   if (loading) {
@@ -18,7 +18,7 @@ function PlaylistList({ loading, error, playlists }) {
   }
 
   if (playlists !== false) {
-    return <List items={playlists} component={RepoListItem} />;
+    return <List items={playlists} component={PlaylistListItem} />;
   }
 
   return null;

@@ -2,9 +2,9 @@ import { fromJS } from 'immutable';
 
 import appReducer from '../reducer';
 import {
-  loadRepos,
+  loadPlaylists,
   playlistsLoaded,
-  repoLoadingError,
+  playlistLoadingError,
 } from '../actions';
 
 describe('appReducer', () => {
@@ -15,7 +15,7 @@ describe('appReducer', () => {
       error: false,
       currentUser: false,
       userData: fromJS({
-        repositories: false,
+        playlistsitories: false,
       }),
     });
   });
@@ -25,29 +25,29 @@ describe('appReducer', () => {
     expect(appReducer(undefined, {})).toEqual(expectedResult);
   });
 
-  it('should handle the loadRepos action correctly', () => {
+  it('should handle the loadPlaylists action correctly', () => {
     const expectedResult = state
       .set('loading', true)
       .set('error', false)
-      .setIn(['userData', 'repositories'], false);
+      .setIn(['userData', 'playlistsitories'], false);
 
-    expect(appReducer(state, loadRepos())).toEqual(expectedResult);
+    expect(appReducer(state, loadPlaylists())).toEqual(expectedResult);
   });
 
   it('should handle the playlistsLoaded action correctly', () => {
     const fixture = [{
-      name: 'My Repo',
+      name: 'My Playlist',
     }];
     const username = 'test';
     const expectedResult = state
-      .setIn(['userData', 'repositories'], fixture)
+      .setIn(['userData', 'playlistsitories'], fixture)
       .set('loading', false)
       .set('currentUser', username);
 
     expect(appReducer(state, playlistsLoaded(fixture, username))).toEqual(expectedResult);
   });
 
-  it('should handle the repoLoadingError action correctly', () => {
+  it('should handle the playlistLoadingError action correctly', () => {
     const fixture = {
       msg: 'Not found',
     };
@@ -55,6 +55,6 @@ describe('appReducer', () => {
       .set('error', fixture)
       .set('loading', false);
 
-    expect(appReducer(state, repoLoadingError(fixture))).toEqual(expectedResult);
+    expect(appReducer(state, playlistLoadingError(fixture))).toEqual(expectedResult);
   });
 });

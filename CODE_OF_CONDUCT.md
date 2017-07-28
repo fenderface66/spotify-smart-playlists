@@ -2,7 +2,7 @@
 
 As contributors and maintainers of this project, and in the interest of
 fostering an open and welcoming community, we pledge to respect all people who
-contribute through reporting issues, posting feature requests, updating
+contribute through playlistrting issues, posting feature requests, updating
 documentation, submitting pull requests or patches, and other activities.
 
 We are committed to making participation in this project a harassment-free
@@ -35,10 +35,10 @@ This Code of Conduct applies both within project spaces and in public spaces
 when an individual is representing the project or its community.
 
 Instances of abusive, harassing, or otherwise unacceptable behavior may be
-reported by contacting the project maintainer at contact@mxstbr.com. All
+playlistrted by contacting the project maintainer at contact@mxstbr.com. All
 complaints will be reviewed and investigated and will result in a response that
 is deemed necessary and appropriate to the circumstances. Maintainers are
-obligated to maintain confidentiality with regard to the reporter of an
+obligated to maintain confidentiality with regard to the playlistrter of an
 incident.
 
 

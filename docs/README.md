@@ -32,7 +32,7 @@
 
 ### Quickstart
 
-1. First, let's kick the tyres by launching the sample _Repospective_ app
+1. First, let's kick the tyres by launching the sample _Playlistspective_ app
    bundled with this project to demo some of its best features:
 
     ```Shell

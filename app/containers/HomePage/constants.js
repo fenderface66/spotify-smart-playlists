@@ -10,4 +10,7 @@
  */
 
 export const GET_AUTHPARAMS = 'smartify/Home/GET_AUTHPARAMS';
-export const GET_playlists_SUCCESS = 'smartify/Home/GET_playlists_SUCCESS';
+export const TOGGLE_SMARTEDITOR = 'smartify/Home/TOGGLE_SMARTEDITOR';
+export const CHANGE_FORM_LOGIC = 'smartify/Home/CHANGE_FORM_LOGIC';
+export const CHANGE_TIME_UNIT = 'smartify/Home/CHANGE_TIME_UNIT';
+export const CHANGE_TIME_AMOUNT = 'smartify/Home/CHANGE_TIME_AMOUNT';

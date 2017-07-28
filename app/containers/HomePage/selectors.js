@@ -10,9 +10,15 @@ const makeSelectAuthParams = () => createSelector(
   selectHome,
   (homeState) => homeState.get('authParams')
 );
+
+const makeSelectEditorState = () => createSelector(
+  selectHome,
+  (homeState) => homeState.get('editorState')
+);
  
 
 export {
   selectHome,
-  makeSelectAuthParams,
+  makeSelectAuthParams,        
+  makeSelectEditorState   
 };

@@ -8,7 +8,7 @@ Since all the files kept in the same folder, this should be a breeze.
 
 Often when working on a project, you find you've created a component that you
 could use is other upcoming projects. You would like to extract that
-component to its own git repository and npm package since keeping the version
+component to its own git playlistsitory and npm package since keeping the version
 histories separate makes a lot of sense.
 
 You're not finished with the component, but would like to continue working on it

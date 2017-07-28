@@ -8,42 +8,42 @@ import { createMockTask } from 'redux-saga/lib/utils';
 import { LOCATION_CHANGE } from 'react-router-redux';
 
 import { LOAD_REPOS } from 'containers/App/constants';
-import { playlistsLoaded, repoLoadingError } from 'containers/App/actions';
+import { playlistsLoaded, playlistLoadingError } from 'containers/App/actions';
 
-import { getRepos, spotifydata } from '../sagas';
+import { getPlaylists, spotifydata } from '../sagas';
 
 const username = 'mxstbr';
 
 /* eslint-disable redux-saga/yield-effects */
-describe('getRepos Saga', () => {
-  let getReposGenerator;
+describe('getPlaylists Saga', () => {
+  let getPlaylistsGenerator;
 
   // We have to test twice, once for a successful load and once for an unsuccessful one
   // so we do all the stuff that happens beforehand automatically in the beforeEach
   beforeEach(() => {
-    getReposGenerator = getRepos();
+    getPlaylistsGenerator = getPlaylists();
 
-    const selectDescriptor = getReposGenerator.next().value;
+    const selectDescriptor = getPlaylistsGenerator.next().value;
     expect(selectDescriptor).toMatchSnapshot();
 
-    const callDescriptor = getReposGenerator.next(username).value;
+    const callDescriptor = getPlaylistsGenerator.next(username).value;
     expect(callDescriptor).toMatchSnapshot();
   });
 
   it('should dispatch the playlistsLoaded action if it requests the data successfully', () => {
     const response = [{
-      name: 'First repo',
+      name: 'First playlist',
     }, {
-      name: 'Second repo',
+      name: 'Second playlist',
     }];
-    const putDescriptor = getReposGenerator.next(response).value;
+    const putDescriptor = getPlaylistsGenerator.next(response).value;
     expect(putDescriptor).toEqual(put(playlistsLoaded(response, username)));
   });
 
-  it('should call the repoLoadingError action if the response errors', () => {
+  it('should call the playlistLoadingError action if the response errors', () => {
     const response = new Error('Some error');
-    const putDescriptor = getReposGenerator.throw(response).value;
-    expect(putDescriptor).toEqual(put(repoLoadingError(response)));
+    const putDescriptor = getPlaylistsGenerator.throw(response).value;
+    expect(putDescriptor).toEqual(put(playlistLoadingError(response)));
   });
 });
 
@@ -53,7 +53,7 @@ describe('spotifydataSaga Saga', () => {
 
   it('should start task to watch for LOAD_REPOS action', () => {
     const takeLatestDescriptor = spotifydataSaga.next().value;
-    expect(takeLatestDescriptor).toEqual(takeLatest(LOAD_REPOS, getRepos));
+    expect(takeLatestDescriptor).toEqual(takeLatest(LOAD_REPOS, getPlaylists));
   });
 
   it('should yield until LOCATION_CHANGE action', () => {

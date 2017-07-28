@@ -1,12 +1,12 @@
 /**
- * Gets the repositories of the user from Github
+ * Gets the playlistsitories of the user from Github
  */
 
 import { take, call, put, select, cancel, takeLatest } from 'redux-saga/effects';
 import { LOCATION_CHANGE } from 'react-router-redux';
 import { GET_AUTHPARAMS } from 'containers/HomePage/constants';
 import { LOAD_PLAYLISTS_SUCCESS } from 'containers/App/constants';
-import { playlistsLoaded, repoLoadingError } from 'containers/App/actions';
+import { playlistsLoaded, playlistLoadingError } from 'containers/App/actions';
 
 import request from 'utils/request';
 import { makeSelectAuthParams } from 'containers/HomePage/selectors';
@@ -33,7 +33,7 @@ export function* getSpotifyPlaylists() {
 		yield put(playlistsLoaded(playlists));
 	} catch (err) {
     console.log(err);
-		yield put(repoLoadingError(err));
+		yield put(playlistLoadingError(err));
 	}
 }
 
@@ -41,7 +41,7 @@ export function* getSpotifyPlaylists() {
  * Root saga manages watcher lifecycle
  */
 export function* spotifyData() {
-  // Watches for GET_AUTHPARAMS actions and calls getRepos when one comes in.
+  // Watches for GET_AUTHPARAMS actions and calls getPlaylists when one comes in.
   // By using `takeLatest` only the result of the latest API call is applied.
   // It returns task descriptor (just like fork) so we can continue execution
   const watcherplaylists = yield takeLatest(GET_AUTHPARAMS, getSpotifyPlaylists);

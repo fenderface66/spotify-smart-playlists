@@ -1,5 +1,5 @@
 /**
- * Test the repo list item
+ * Test the playlist list item
  */
 
 import React from 'react';
@@ -7,15 +7,15 @@ import { shallow, render } from 'enzyme';
 import { IntlProvider } from 'react-intl';
 
 import ListItem from 'components/ListItem';
-import { RepoListItem } from '../index';
+import { PlaylistListItem } from '../index';
 
 const renderComponent = (props = {}) => render(
   <IntlProvider locale="en">
-    <RepoListItem {...props} />
+    <PlaylistListItem {...props} />
   </IntlProvider>
 );
 
-describe('<RepoListItem />', () => {
+describe('<PlaylistListItem />', () => {
   let item;
 
   // Before each test reset the item data for safety
@@ -33,7 +33,7 @@ describe('<RepoListItem />', () => {
 
   it('should render a ListItem', () => {
     const renderedComponent = shallow(
-      <RepoListItem item={item} />
+      <PlaylistListItem item={item} />
     );
     expect(renderedComponent.find(ListItem).length).toBe(1);
   });
@@ -54,7 +54,7 @@ describe('<RepoListItem />', () => {
     expect(renderedComponent.text()).toContain(item.owner.login);
   });
 
-  it('should render the repo name', () => {
+  it('should render the playlist name', () => {
     const renderedComponent = renderComponent({ item });
     expect(renderedComponent.text()).toContain(item.name);
   });

@@ -35,7 +35,7 @@ if (!exists(dllManifestPath)) {
       name: 'react-boilerplate-dlls',
       private: true,
       author: pkg.author,
-      repository: pkg.repository,
+      playlistsitory: pkg.playlistsitory,
       version: pkg.version,
     }), null, 2),
     'utf8'
