@@ -18,7 +18,8 @@
 import {
   LOAD_PLAYLISTS_SUCCESS,
   LOAD_PLAYLISTS_ERROR,
-  TOGGLE_SELECTED_PLAYLIST
+  TOGGLE_SELECTED_PLAYLIST,
+  LOAD_GENRES_SUCCESS,
 } from './constants';
 
 
@@ -33,7 +34,7 @@ import {
 export function playlistsLoaded(playlists) {
   return {
     type: LOAD_PLAYLISTS_SUCCESS,
-    playlists
+    playlists,
   };
 }
 
@@ -56,6 +57,27 @@ export function toggleSelectedPlaylist(toggleState, playlist, index) {
     type: TOGGLE_SELECTED_PLAYLIST,
     toggleState,
     playlist,
-    index
+    index,
+  };
+}
+
+export function genresLoaded(genres) {
+  return {
+    type: LOAD_GENRES_SUCCESS,
+    genres,
+  };
+}
+
+/**
+ * Dispatched when loading the playlistsitories fails
+ *
+ * @param  {object} error The error
+ *
+ * @return {object}       An action object with a type of LOAD_playlists_ERROR passing the error
+ */
+export function genresLoadingError(error) {
+  return {
+    type: LOAD_GENRES_ERROR,
+    error,
   };
 }

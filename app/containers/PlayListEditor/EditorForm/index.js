@@ -7,6 +7,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
+import { makeSelectGenres } from 'containers/App/selectors';
 import { makeSelectFormLogic, makeSelectTimeUnit, makeSelectTimeAmount } from '../selectors';
 import { changeFormLogic, changeTimeUnit, changeTimeAmount } from '../actions';
 import Option from './Option';
@@ -14,16 +15,21 @@ import Option from './Option';
 export class EditorForm extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
 
   renderNumberOptions(limit) {
-    var options = [];
-    console.log('hello');
-    for (var i = 0; i < limit; i++) {
-        options.push(<Option key={'option' + i} value={(i+1)}>{(i + 1)}</Option>);
+    const options = [];
+    for (let i = 0; i < limit; i += 1) {
+      options.push(<Option key={'option' + i} value={(i + 1)} > {(i + 1)}</Option>);
     }
     return options;
   }
 
+  renderGenres() {
+    const options = [];
+    for (let i = 0; i < this.props.genres.genres.length; i += 1) {
+      options.push(<Option key={'option' + i} value={this.props.genres.genres[i]}> {this.props.genres.genres[i]} </Option>);
+    }
+    return options;
+  }
   renderFormQuestions() {
-
     switch (this.props.formLogic) {
       case 'mostRecent':
         return (
@@ -42,19 +48,25 @@ export class EditorForm extends React.PureComponent { // eslint-disable-line rea
                 {this.renderNumberOptions(50)}
               </select>
             </fieldset>
-            <input type="submit" value="Create"/>
           </div>
         );
-        break;
       case 'genres':
-        break;
+        return (
+          <div>
+            <fieldset>
+              <label htmlFor="genre">Songs with the following genre: </label>
+              <select name="genre" onChange={(evt) => this.props.onChangeTimeAmount(evt.target.value)}>
+                {this.renderGenres()}
+              </select>
+            </fieldset>
+          </div>
+        );
       default:
-        break;
+        return null;
     }
   }
 
   render() {
-    console.log(this.props);
     return (
       <form>
         <fieldset>
@@ -74,7 +86,7 @@ export class EditorForm extends React.PureComponent { // eslint-disable-line rea
             <option value="monthly">Monthly</option>
           </select>
         </fieldset>
-
+        <input type="submit" value="Create" />
       </form>
     );
   }
@@ -82,14 +94,18 @@ export class EditorForm extends React.PureComponent { // eslint-disable-line rea
 
 EditorForm.propTypes = {
   formLogic: React.PropTypes.string,
+  onChangeFormLogic: React.PropTypes.func,
   timeUnit: React.PropTypes.string,
-  timeMount: React.PropTypes.number
+  onChangeTimeUnit: React.PropTypes.func,
+  onChangeTimeAmount: React.PropTypes.func,
+  genres: React.PropTypes.object,
 };
 
 const mapStateToProps = createStructuredSelector({
   formLogic: makeSelectFormLogic(),
   timeUnit: makeSelectTimeUnit(),
   timeAmount: makeSelectTimeAmount(),
+  genres: makeSelectGenres(),
 });
 
 export function mapDispatchToProps(dispatch) {

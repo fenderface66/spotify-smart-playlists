@@ -15,14 +15,16 @@ import { fromJS } from 'immutable';
 import {
   LOAD_PLAYLISTS_SUCCESS,
   LOAD_PLAYLISTS_ERROR,
-  TOGGLE_SELECTED_PLAYLIST
-} from './constants'; 
+  TOGGLE_SELECTED_PLAYLIST,
+  LOAD_GENRES_SUCCESS,
+} from './constants';
 
 // The initial state of the App
 const initialState = fromJS({
   loading: false,
   error: false,
-  playlists: null
+  playlists: null,
+  genres: null,
 });
 
 function appReducer(state = initialState, action) {
@@ -30,22 +32,23 @@ function appReducer(state = initialState, action) {
     case LOAD_PLAYLISTS_SUCCESS:
       return state
         .set('playlists', action.playlists.items)
-        .set('loading', false)
+        .set('loading', false);
     case LOAD_PLAYLISTS_ERROR:
       return state
         .set('error', action.error)
         .set('loading', false);
     case TOGGLE_SELECTED_PLAYLIST:
-        var playlists = state.get('playlists');
-        if (action.toggleState) {
-          playlists[action.index].selected = true;
-        
-        } else {
-          playlists[action.index].selected = false;
-        }
-        return state
-          .set('playlists', playlists)
-        
+      const playlists = state.get('playlists');
+      if (action.toggleState) {
+        playlists[action.index].selected = true;
+      } else {
+        playlists[action.index].selected = false;
+      }
+      return state
+        .set('playlists', playlists);
+    case LOAD_GENRES_SUCCESS:
+      return state
+        .set('genres', action.genres);
     default:
       return state;
   }

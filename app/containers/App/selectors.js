@@ -21,6 +21,11 @@ const makeSelectPlaylists = () => createSelector(
   (globalState) => globalState.get('playlists')
 );
 
+const makeSelectGenres = () => createSelector(
+  selectGlobal,
+  (globalState) => globalState.get('genres')
+);
+
 const makeSelectLocationState = () => {
   let prevRoutingState;
   let prevRoutingStateJS;
@@ -43,4 +48,5 @@ export {
   makeSelectError,
   makeSelectPlaylists,
   makeSelectLocationState,
+  makeSelectGenres,
 };
