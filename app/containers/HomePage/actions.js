@@ -17,7 +17,7 @@
 
 import {
   GET_AUTHPARAMS,
-  TOGGLE_SMARTEDITOR
+  TOGGLE_SMARTEDITOR,
 } from './constants';
 
 export function getAuthParams(params) {
@@ -28,8 +28,7 @@ export function getAuthParams(params) {
 }
 
 export function toggleSmartEditor() {
-  console.log('here');
   return {
-    type: TOGGLE_SMARTEDITOR
+    type: TOGGLE_SMARTEDITOR,
   };
 }
