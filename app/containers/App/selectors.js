@@ -26,6 +26,11 @@ const makeSelectGenres = () => createSelector(
   (globalState) => globalState.get('genres')
 );
 
+const makeSelectSmartForm = () => createSelector(
+  selectGlobal,
+  (globalState) => globalState.get('smartForm')
+);
+
 const makeSelectLocationState = () => {
   let prevRoutingState;
   let prevRoutingStateJS;
@@ -49,4 +54,5 @@ export {
   makeSelectPlaylists,
   makeSelectLocationState,
   makeSelectGenres,
+  makeSelectSmartForm,
 };
