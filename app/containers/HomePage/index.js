@@ -14,7 +14,7 @@ import PlaylistList from 'components/PlaylistList';
 import Button from 'components/Button';
 import AtPrefix from './AtPrefix';
 import CenteredSection from './CenteredSection';
-import PlayListFeed from 'containers/PlayListFeed'; 
+import PlayListFeed from 'containers/PlayListFeed';
 import PlayListEditor from 'containers/PlayListEditor';
 import Form from './Form';
 import Input from './Input';
@@ -28,17 +28,13 @@ export class HomePage extends React.PureComponent { // eslint-disable-line react
    * when initial state username is not null, submit the form to load playlists
    */
   componentDidMount() {
-    
     if (this.props.username && this.props.username.trim().length > 0) {
       this.props.onSubmitForm();
     }
-    
     if (this.props.router.location.query.access_token) {
       this.props.onReceiveAuth(this.props.router.location.query);
     }
-    
   }
-  
   renderButton() {
     return (
       <div>
@@ -46,7 +42,7 @@ export class HomePage extends React.PureComponent { // eslint-disable-line react
           <FormattedMessage {...messages.trymeHeader} />
         </H2>
         <Button href="/api/userAuthorise">
-          Login 
+          Login
         </Button>
       </div>
     )
@@ -77,11 +73,9 @@ export class HomePage extends React.PureComponent { // eslint-disable-line react
               <FormattedMessage {...messages.startProjectMessage} />
             </p>
           </CenteredSection>
-             
           <Section>
-              
-              {!this.props.router.location.query.access_token ? this.renderButton() : <PlayListEditor /> }
-              <PlayListFeed />
+            {!this.props.router.location.query.access_token ? this.renderButton() : <PlayListEditor /> }
+            <PlayListFeed />
           </Section>
         </div>
       </article>
