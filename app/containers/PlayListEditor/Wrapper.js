@@ -7,7 +7,7 @@ const Wrapper = styled.div`
   padding: 12px;
   .genre-container {
     overflow-y: scroll;
-    max-height: 300px;
+    max-height: 200px;
   }
 `;
 

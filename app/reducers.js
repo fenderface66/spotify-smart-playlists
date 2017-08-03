@@ -5,6 +5,7 @@
 
 import { fromJS } from 'immutable';
 import { combineReducers } from 'redux-immutable';
+import { reducer as formReducer } from 'redux-form';
 import { LOCATION_CHANGE } from 'react-router-redux';
 
 import globalReducer from 'containers/App/reducer';
@@ -25,7 +26,7 @@ const routeInitialState = fromJS({
 
 /**
  * Merge route into the global application state
- */
+ */            
 function routeReducer(state = routeInitialState, action) {
   switch (action.type) {
     /* istanbul ignore next */
@@ -46,6 +47,7 @@ export default function createReducer(asyncReducers) {
     route: routeReducer,
     global: globalReducer,
     language: languageProviderReducer,
+    form: formReducer,
     ...asyncReducers,
   });
 }

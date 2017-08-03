@@ -6,7 +6,7 @@
 
 const querystring = require('querystring');
 const request = require('request'); // "Request" library
-const url = require('url');   
+const url = require('url');
 
 const client_id = '4d6b8fb609cb4b1fbf703331fba1ac3f'; // Client id
 const client_secret = '48383dc3e4614055a76356bd807707d1'; // Secret
@@ -25,13 +25,13 @@ var generateRandomString = function(length) {
 var stateKey = 'spotify_auth_state';
 
 exports.login = function(req, res, next) {
-    
+
   var state = generateRandomString(16);
   res.cookie(stateKey, state);
 
   // your application requests authorization
   var scope = 'user-read-private user-read-email';
-  
+
   res.redirect('https://accounts.spotify.com/authorize?' +
     querystring.stringify({
       response_type: 'code',
@@ -50,7 +50,7 @@ exports.tokenExchange = function(req, res, next) {
   var code = req.query.code || null;
   var state = req.query.state || null;
   var storedState = req.cookies ? req.cookies[stateKey] : null;
-  
+
   if (state === null || state !== storedState) {
     res.redirect('/#' +
       querystring.stringify({
@@ -72,7 +72,7 @@ exports.tokenExchange = function(req, res, next) {
     };
 
     request.post(authOptions, function(error, response, body) {
-      
+
       console.log(body);
       if (!error && response.statusCode === 200) {
 
