@@ -12,6 +12,11 @@ const client_id = '4d6b8fb609cb4b1fbf703331fba1ac3f'; // Client id
 const client_secret = '48383dc3e4614055a76356bd807707d1'; // Secret
 const redirect_uri = 'http://localhost:3000/api/authCallback'; // Redirect uri
 
+const mongo = require('mongodb');
+const monk = require('monk');
+const db = monk('127.0.0.1:27017');
+const users = db.get('users')
+
 var generateRandomString = function(length) {
   var text = '';
   var possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -87,9 +92,8 @@ exports.tokenExchange = function(req, res, next) {
 
         // use the access token to access the Spotify Web API
         request.get(options, function(error, response, body) {
-          console.log(body);
+          users.insert(body);
         });
-
         // we can also pass the token to the browser to make requests from there
         res.redirect(url.format({
          pathname:"/",

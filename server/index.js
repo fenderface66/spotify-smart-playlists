@@ -10,19 +10,23 @@ const isDev = process.env.NODE_ENV !== 'production';
 const ngrok = (isDev && process.env.ENABLE_TUNNEL) || argv.tunnel ? require('ngrok') : false;
 const resolve = require('path').resolve;
 const app = express();
-var bodyParser = require('body-parser');
+const mongo = require('mongodb');
+const monk = require('monk');
+const db = monk('l127.0.0.1:27017/smartify');
+const bodyParser = require('body-parser');
 
 const spotifyAuth = require('./spotify/userAuthorise');
 const spotifySmartLists = require('./spotify/smartLists')
 
-
-
 // If you need a backend, e.g. an API, add your custom backend-specific middleware here
 // app.use('/api', myApi);
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json())
-
-app.use(cookieParser())
+app.use(bodyParser.json());
+app.use(cookieParser());
+app.use(function(req,res,next) {
+  req.db = db;
+  next();
+});
 
 app.get('/api/userAuthorise', spotifyAuth.login);
 
