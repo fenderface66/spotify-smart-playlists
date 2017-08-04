@@ -66,9 +66,12 @@ export function* submitSmartForm() {
     url: requestURL,
     method: 'POST',
     headers: {
-    'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
     },
-    body: JSON.stringify(smartForm),
+    body: JSON.stringify({
+      smartForm,
+      accessToken
+    }),
   };
   try {
     // Call our request helper (see 'utils/request')

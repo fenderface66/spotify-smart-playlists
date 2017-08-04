@@ -223,6 +223,8 @@
     "ip": "1.1.4",
     "lodash": "4.17.2",
     "minimist": "1.2.0",
+    "mongodb": "^2.2.30",
+    "monk": "^6.0.3",
     "react": "15.4.1",
     "react-dom": "15.4.1",
     "react-helmet": "3.2.2",
