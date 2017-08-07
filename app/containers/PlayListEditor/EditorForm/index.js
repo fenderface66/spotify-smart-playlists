@@ -14,29 +14,12 @@ import Form from './Form';
 
 export class EditorForm extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
 
-  submit = (values) => {
-    // print the form values to the console
-    console.log(values);
-  }
-
   renderNumberOptions(limit) {
     const options = [];
     for (let i = 0; i < limit; i += 1) {
       options.push(<Option key={`option${i}`} value={(i + 1)} > {(i + 1)}</Option>);
     }
     return options;
-  }
-
-  renderGenres() {
-    const checkBoxes = [];
-    for (let i = 0; i < this.props.genres.genres.length; i += 1) {
-      // checkBoxes.push(
-        // <CheckboxItem key={`option${i}`}>
-        //   <label htmlFor="{this.props.genres.genres[i]} ">{this.props.genres.genres[i]}</label>
-        //   <Field component="input" type="checkbox" value="{this.props.genres.genres[i]}" name="{this.props.genres.genres[i]}" />
-        // </CheckboxItem>);
-    }
-    return checkBoxes;
   }
 
   render() {

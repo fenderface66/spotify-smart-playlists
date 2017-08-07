@@ -24,6 +24,7 @@ const initialState = fromJS({
   authParams: {
     access_token: '',
     refresh_token: '',
+    userId: null,
   },
   editorState: false,
   formLogic: {
