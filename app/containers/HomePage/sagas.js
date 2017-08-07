@@ -10,7 +10,7 @@ import { playlistsLoaded, playlistLoadingError, genresLoaded } from 'containers/
 
 import request from 'utils/request';
 import { makeSelectAuthParams } from 'containers/HomePage/selectors';
-import { makeSelectSmartForm } from 'containers/App/selectors';
+import { makeSelectSmartForm, makeSelectPlaylists } from 'containers/App/selectors';
 
 export function* getSpotifyPlaylists() {
   const authParams = yield select(makeSelectAuthParams());
@@ -58,9 +58,13 @@ export function* getSpotifyGenres() {
 export function* submitSmartForm() {
   const smartForm = yield select(makeSelectSmartForm());
   const authParams = yield select(makeSelectAuthParams());
-  console.log('Here is the smart Form');
-  console.log(smartForm);
-  const accessToken = authParams.access_token;
+  const playlists = yield select(makeSelectPlaylists());
+  smartForm.playlists = [];
+  playlists.map((playlist) => {
+    if (playlist.selected) {
+      smartForm.playlists.push(playlist.id);
+    }
+  });
   const requestURL = 'http://localhost:3000/api/createSmartList';
   const options = {
     url: requestURL,
@@ -70,7 +74,7 @@ export function* submitSmartForm() {
     },
     body: JSON.stringify({
       smartForm,
-      accessToken
+      authParams
     }),
   };
   try {
