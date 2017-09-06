@@ -6,11 +6,12 @@ const monk = require('monk');
 const db = monk('localhost:27017/smartify');
 const playlists = db.get('playlists');
 const users = db.get('users');
+const tracks = [];
+const promises = [];
 
-function fillPlaylist(playlistOptions) {
+function getPlaylistTracks(playlistOptions, playlist) {
   return new Promise((resolve, reject) => {
-    const requestURL = `https://api.spotify.com/v1/users/${playlistOptions.authParams.userId}/playlists/${playlistOptions.playlists[0]}/tracks`;
-    console.log(requestURL);
+    const requestURL = `https://api.spotify.com/v1/users/${playlistOptions.authParams.userId}/playlists/${playlist}/tracks`;
     const options = {
       url: requestURL,
       method: 'GET',
@@ -21,16 +22,52 @@ function fillPlaylist(playlistOptions) {
     };
     request.get(options, (error, response, body) => {
       if (response.statusCode > 199 && response.statusCode < 300) {
-        console.log(body);
-        return resolve(body)
+        resolve(body);
       } else { 
         console.log('Error Detected');
         //console.log(response);
-        return reject(response);
+        reject(response);
       }
     });
   })
-  
+}
+
+function passesFilter(item, filter) {
+  const unitAmount = parseInt(filter.timeAmount);
+  let filterDate;
+  let itemDate;
+  console.log(filter.timeUnit);
+  switch(filter.timeUnit) {
+    case 'days': 
+    
+      
+    break;
+    case 'weeks':
+      unitAmount = (unitAmount * 7);
+    break;
+
+    case 'months':
+      unitAmount = (unitAmount * 30);
+    break;
+
+    default:
+    break;
+  }
+  filterDate = new Date();
+  itemDate = new Date(item.added_at);
+  d.setDate(d.getDate() - unitAmount);
+  console.log(itemDate);
+  if(itemDate > filterDate) {
+    return true;
+  }
+}
+
+function filterTracks(items, config) {
+  items.map(item => {
+    if (passesFilter(item, config)) {
+      tracks.push(item.track.uri);
+    }
+  })
 }
 
 exports.createSmartList = (req, res, next) => {
@@ -48,6 +85,7 @@ exports.createSmartList = (req, res, next) => {
     },
     json: true,
   };
+  
   // request.post(options, (error, response, body) => {
   //   if (response.statusCode > 199 && response.statusCode < 300) {
   //     console.log('Adding Smart Form To User');
@@ -69,9 +107,15 @@ exports.createSmartList = (req, res, next) => {
   //     res.send(error);
   //   }
   // });
-  fillPlaylist(smartForm).then(results => {
-    res.send(results);
-  }).catch(err => {
-    res.send(err);
+  smartForm.playlists.map((playlist) => {
+    promises.push(getPlaylistTracks(smartForm, playlist));
+  })
+
+  Promise.all(promises).then(data => {
+    let items = [];
+    data.map((playlist) => {
+      items = items.concat(playlist.items);
+    })
+    filterTracks(items, smartForm);
   });
 };
