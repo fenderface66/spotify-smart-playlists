@@ -6,7 +6,8 @@ import { take, call, put, select, cancel, takeLatest } from 'redux-saga/effects'
 import { LOCATION_CHANGE } from 'react-router-redux';
 import { GET_AUTHPARAMS } from 'containers/HomePage/constants';
 import { LOAD_PLAYLISTS_SUCCESS, SUBMIT_SMARTFORM } from 'containers/App/constants';
-import { playlistsLoaded, playlistLoadingError, genresLoaded } from 'containers/App/actions';
+import { playlistsLoaded, playlistLoadingError, genresLoaded, smartListCreated } from 'containers/App/actions';
+import { toggleSmartEditor } from 'containers/HomePage/actions';
 
 import request from 'utils/request';
 import { makeSelectAuthParams } from 'containers/HomePage/selectors';
@@ -52,7 +53,7 @@ export function* getSpotifyGenres() {
     yield put(genresLoaded(genres));
   } catch (err) {
     console.log(err);
-  }
+  } 
 }
 
 export function* submitSmartForm() {
@@ -79,9 +80,11 @@ export function* submitSmartForm() {
   };
   try {
     // Call our request helper (see 'utils/request')
-    const genres = yield call(request, requestURL, options);
-    yield put(genresLoaded(genres));
+    const createdPlaylist = yield call(request, requestURL, options);
+    //yield put(smartListCreated(createdPlaylist));
+    //yield put(toggleSmartEditor);
   } catch (err) {
+    console.log('Error Found');
     console.log(err);
   }
 }

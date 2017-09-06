@@ -18,6 +18,7 @@ import {
   TOGGLE_SELECTED_PLAYLIST,
   LOAD_GENRES_SUCCESS,
   SUBMIT_SMARTFORM,
+  SMARTLIST_CREATED,
 } from './constants';
 
 // The initial state of the App
@@ -27,6 +28,7 @@ const initialState = fromJS({
   playlists: null,
   genres: null,
   smartForm: null,
+  activeSmartList: null,
 });
 
 function appReducer(state = initialState, action) {
@@ -54,6 +56,9 @@ function appReducer(state = initialState, action) {
     case SUBMIT_SMARTFORM:
       return state
         .set('smartForm', action.smartForm);
+    case SMARTLIST_CREATED:
+        return state
+          .set('activeSmartList', action.smartList);
     default:
       return state;
   }

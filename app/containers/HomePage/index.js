@@ -16,12 +16,14 @@ import AtPrefix from './AtPrefix';
 import CenteredSection from './CenteredSection';
 import PlayListFeed from 'containers/PlayListFeed';
 import PlayListEditor from 'containers/PlayListEditor';
+import PlayListConfirmation from 'containers/PlayListConfirmation'
 import Form from './Form';
 import Input from './Input';
 import Section from './Section';
 import messages from './messages';
 import { getAuthParams } from './actions';
-import { makeSelectAuthParams } from './selectors';
+import { makeSelectAuthParams, makeSelectEditorState } from './selectors';
+import { makeSelectActiveSmartList} from 'containers/App/selectors';
 
 export class HomePage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   /**
@@ -46,6 +48,26 @@ export class HomePage extends React.PureComponent { // eslint-disable-line react
         </Button>
       </div>
     )
+  }
+  renderView() {
+    if (!this.props.router.location.query.access_token && this.props.smartList === null) {
+      return this.renderButton();
+    } else if (this.props.router.location.query.access_token && this.props.smartList === null) {
+      return (
+        <PlayListEditor />
+      )
+    } else {
+      return (
+        <PlayListConfirmation />
+      )
+    }
+  }
+  renderFeed() {
+    if (!this.props.editorState) {
+      return (
+        <PlayListFeed />
+      )
+    }
   }
 
   render() {
@@ -74,8 +96,8 @@ export class HomePage extends React.PureComponent { // eslint-disable-line react
             </p>
           </CenteredSection>
           <Section>
-            {!this.props.router.location.query.access_token ? this.renderButton() : <PlayListEditor /> }
-            <PlayListFeed />
+            {this.renderView()}
+            {this.renderFeed()}
           </Section>
         </div>
       </article>
@@ -100,7 +122,9 @@ export function mapDispatchToProps(dispatch) {
 }
 
 const mapStateToProps = createStructuredSelector({
-  authParams: makeSelectAuthParams()
+  authParams: makeSelectAuthParams(),
+  smartList: makeSelectActiveSmartList(),
+  editorState: makeSelectEditorState(),
 });
 
 // Wrap the component to inject dispatch and state into it

@@ -21,6 +21,7 @@ import {
   TOGGLE_SELECTED_PLAYLIST,
   LOAD_GENRES_SUCCESS,
   SUBMIT_SMARTFORM,
+  SMARTLIST_CREATED
 } from './constants';
 
 
@@ -81,11 +82,18 @@ export function genresLoadingError(error) {
     type: LOAD_GENRES_ERROR,
     error,
   };
-}
+} 
 
 export function submitSmartForm(smartForm) {
   return {
-    type: SUBMIT_SMARTFORM,
+    type: SUBMIT_SMARTFORM, 
     smartForm,
+  };
+}
+
+export function smartListCreated(smartList) {
+  return {
+    type: SMARTLIST_CREATED,
+    smartList,
   };
 }

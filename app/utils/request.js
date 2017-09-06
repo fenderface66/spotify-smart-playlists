@@ -8,6 +8,8 @@ import 'whatwg-fetch';
  * @return {object}          The parsed JSON from the request
  */
 function parseJSON(response) {
+  console.log('Here is the json to be parsed');
+  console.log(response);
   return response.json();
 }
 
@@ -22,7 +24,7 @@ function checkStatus(response) {
   if (response.status >= 200 && response.status < 300) {
     return response;
   }
-
+  console.log('we have found an error');
   const error = new Error(response.statusText);
   error.response = response;
   throw error;
