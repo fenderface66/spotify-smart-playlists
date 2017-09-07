@@ -41,7 +41,7 @@ export function playlistsLoaded(playlists) {
 }
 
 /**
- * Dispatched when loading the playlistsitories fails
+ * Dispatched when loading the playlist fails
  *
  * @param  {object} error The error
  *
@@ -92,6 +92,7 @@ export function submitSmartForm(smartForm) {
 }
 
 export function smartListCreated(smartList) {
+  console.log(smartList);
   return {
     type: SMARTLIST_CREATED,
     smartList,

@@ -81,8 +81,8 @@ export function* submitSmartForm() {
   try {
     // Call our request helper (see 'utils/request')
     const createdPlaylist = yield call(request, requestURL, options);
-    //yield put(smartListCreated(createdPlaylist));
-    //yield put(toggleSmartEditor);
+    yield put(smartListCreated(createdPlaylist));
+    yield put(toggleSmartEditor);
   } catch (err) {
     console.log('Error Found');
     console.log(err);
